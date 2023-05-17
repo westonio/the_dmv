@@ -18,4 +18,16 @@ RSpec.describe Registrant do
 
     expect(registrant_1.age).to eq(18)
   end
+
+  it 'has default permit value false' do
+    registrant_1 = Registrant.new('Bruce', 18)
+
+    expect(registrant_1.permit?).to eq(false)
+  end
+
+  it 'it can also have permit value true' do
+    registrant_1 = Registrant.new('Bruce', 18, true)
+
+    expect(registrant_1.permit?).to eq(true)
+  end
 end
