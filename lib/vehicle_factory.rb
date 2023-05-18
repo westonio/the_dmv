@@ -1,10 +1,4 @@
-require 'spec_helper'
-require 'pry'
 class VehicleFactory
-
-  def initialize
-    @vehicles = []
-  end
 
   def create_vehicles(vehicle_dataset)
     vehicle_dataset.map do |vehicle_details|
@@ -14,7 +8,7 @@ class VehicleFactory
       model: vehicle_details[:model],
       engine: :ev}
 
-      @vehicles << Vehicle.new(parsed_data)
+      Vehicle.new(parsed_data)
     end
   end
 end
