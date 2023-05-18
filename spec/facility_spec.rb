@@ -49,7 +49,20 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#register vehicle' do
+  describe '#add_plate' do
+    it 'can add its plate' do
+      @facility.add_service('Vehicle Registration')
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+
+      expect(@facility.add_plate(cruz)).to eq(:regular)
+      expect(@facility.add_plate(camaro)).to eq(:antique)
+      expect(@facility.add_plate(bolt)).to eq(:ev)
+    end
+  end
+
+  describe '#register_vehicle' do
     it 'can register a vehicle' do
       @facility.add_service('Vehicle Registration')
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
@@ -92,6 +105,14 @@ RSpec.describe Facility do
       @facility.register_vehicle(camaro)
 
       expect(camaro.registration_date).to eq(Date.today)
+    end
+
+    it 'can update the plate type' do
+      @facility.add_service('Vehicle Registration')
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+      @facility.register_vehicle(camaro)
+
+      expect(camaro.plate_type).to eq(:antique)
     end
   end
 end
