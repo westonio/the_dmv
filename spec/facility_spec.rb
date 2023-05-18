@@ -39,10 +39,26 @@ RSpec.describe Facility do
       expect(@facility.register_vehicle(camaro)).to eq("Error: Vehicle Registration is not enabled for this facility")
     end
 
-    it 'charges $100 for registration' do
+    it 'charges $200 for electric vehicles' do
+      @facility.add_service('Vehicle Registration')
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      @facility.register_vehicle(bolt)
+
+      expect(@facility.collected_fees).to eq(200)
+    end
+
+    it 'charges $25 for cars over 25 years' do
       @facility.add_service('Vehicle Registration')
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
       @facility.register_vehicle(camaro)
+
+      expect(@facility.collected_fees).to eq(25)
+    end
+
+    it 'charges $100 for all others' do
+      @facility.add_service('Vehicle Registration')
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      @facility.register_vehicle(cruz)
 
       expect(@facility.collected_fees).to eq(100)
     end
