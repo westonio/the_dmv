@@ -115,4 +115,26 @@ RSpec.describe Facility do
       expect(camaro.plate_type).to eq(:antique)
     end
   end
+
+  describe 'Getting a drivers license' do
+    it 'can administer a written test' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      
+      expect(@facility.administer_written_test(registrant_1)).to be(false)
+
+      @facility.add_service('Written Test')
+      expect(@facility.administer_written_test(registrant_1)).to be(true)
+    end
+
+    it 'cannot administer a test if no permit and under 16' do
+      registrant_1 = Registrant.new('Bruce', 18)
+      registrant_2 = Registrant.new('Bree', 15, true)
+      
+      expect(@facility.administer_written_test(registrant_1)).to be(false)
+
+      @facility.add_service('Written Test')
+      expect(@facility.administer_written_test(registrant_1)).to be(false)
+      expect(@facility.administer_written_test(registrant_2)).to be(false)
+    end
+  end
 end
