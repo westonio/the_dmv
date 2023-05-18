@@ -17,6 +17,7 @@ class Facility
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration')
       @registered_vehicles << vehicle
+      @collected_fees += 100
     else
       "Error: Vehicle Registration is not enabled for this facility"
     end
