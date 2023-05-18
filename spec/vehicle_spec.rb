@@ -15,6 +15,7 @@ RSpec.describe Vehicle do
       expect(@cruz.model).to eq('Cruz')
       expect(@cruz.engine).to eq(:ice)
       expect(@cruz.registration_date).to eq(nil)
+      expect(@cruz.plate_type).to eq(nil)
     end
   end
 
@@ -31,6 +32,24 @@ RSpec.describe Vehicle do
       expect(@cruz.electric_vehicle?).to eq(false)
       expect(@bolt.electric_vehicle?).to eq(true)
       expect(@camaro.electric_vehicle?).to eq(false)
+    end
+  end
+
+  describe 'register_date' do
+    it 'can update the registration date' do
+      expect(@camaro.register_date).to eq(Date.today)
+    end
+  end
+
+  describe '#register_plate' do
+    it 'can update the plate type' do
+      @camaro.register_plate(:antique)
+      @bolt.register_plate(:ev)
+      @cruz.register_plate(:regular)
+
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@cruz.plate_type).to eq(:regular)
     end
   end
 end
