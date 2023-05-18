@@ -158,5 +158,30 @@ RSpec.describe Facility do
       expect(@facility.administer_road_test(registrant_1)).to eq(true)
       expect(@facility.administer_road_test(registrant_2)).to eq(false)      
     end
+    
+    it 'cannot renew a license if road test not taken' do
+      registrant = Registrant.new('Bruce', 18, true) # of age, but does not have permit
+      @facility.add_service('Written Test')
+      @facility.add_service('Road Test')
+      @facility.add_service('Renew License')
+      
+      @facility.administer_written_test(registrant)
+      # No road test taken
+      expect(@facility.renew_drivers_license(registrant)).to eq(false)
+      expect(registrant.license_data[:renewed]).to eq(false)
+    end
+    
+    it 'can renew a license' do
+      registrant = Registrant.new('Bruce', 18, true) # of age, but does not have permit
+      @facility.add_service('Written Test')
+      @facility.add_service('Road Test')
+      @facility.add_service('Renew License')
+      
+      @facility.administer_written_test(registrant)
+      @facility.administer_road_test(registrant)
+
+      expect(@facility.renew_drivers_license(registrant)).to eq(true)
+      expect(registrant.license_data[:renewed]).to eq(true)
+    end
   end
 end
