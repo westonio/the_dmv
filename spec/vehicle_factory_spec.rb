@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'pry'
+
 RSpec.describe VehicleFactory do
   it 'exists' do
     factory = VehicleFactory.new
