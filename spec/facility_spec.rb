@@ -127,14 +127,36 @@ RSpec.describe Facility do
     end
 
     it 'cannot administer a test if no permit and under 16' do
-      registrant_1 = Registrant.new('Bruce', 18)
-      registrant_2 = Registrant.new('Bree', 15, true)
+      registrant_1 = Registrant.new('Bruce', 18) # of age, but does not have permit
+      registrant_2 = Registrant.new('Bree', 15, true) # has permit, but underage
+      @facility.add_service('Written Test')
       
       expect(@facility.administer_written_test(registrant_1)).to be(false)
-
-      @facility.add_service('Written Test')
-      expect(@facility.administer_written_test(registrant_1)).to be(false)
       expect(@facility.administer_written_test(registrant_2)).to be(false)
+    end
+
+    it 'can administer road test and receive license' do
+      registrant = Registrant.new('Bruce', 18, true) # of age, but does not have permit
+      @facility.add_service('Written Test')
+      @facility.add_service('Road Test')
+      
+      @facility.administer_written_test(registrant)
+      expect(registrant.license_data[:written]).to eq(true)
+      
+      @facility.administer_road_test(registrant)
+      expect(registrant.license_data[:license]).to eq(true)
+    end
+
+    it 'cannot administer road test if written test not taken' do
+      registrant_1 = Registrant.new('Bruce', 23, true) 
+      registrant_2 = Registrant.new('Bree', 18, true)
+      @facility.add_service('Written Test')
+      @facility.add_service('Road Test')
+      
+      @facility.administer_written_test(registrant_1) #took written test
+
+      expect(@facility.administer_road_test(registrant_1)).to eq(true)
+      expect(@facility.administer_road_test(registrant_2)).to eq(false)      
     end
   end
 end
