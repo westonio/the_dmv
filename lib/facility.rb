@@ -14,11 +14,21 @@ class Facility
     @services << service
   end
 
+  def charge_fee(vehicle) # This is a helper method for .register_vehicle
+    if vehicle.electric_vehicle? 
+      @collected_fees += 200 
+    elsif vehicle.antique? 
+      @collected_fees += 25
+    else
+      @collected_fees += 100
+    end
+  end
+
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration')
       @registered_vehicles << vehicle
-      @collected_fees += 100
-      vehicle.register_date
+      charge_fee(vehicle) #uses the charge_fee method
+      vehicle.register_date # reaches through to the register_date method
     else
       "Error: Vehicle Registration is not enabled for this facility"
     end
