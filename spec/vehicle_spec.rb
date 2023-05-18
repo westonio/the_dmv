@@ -37,10 +37,6 @@ RSpec.describe Vehicle do
 
   describe 'register_date' do
     it 'can update the registration date' do
-      @facility = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      @facility.add_service('Vehicle Registration')
-      @facility.register_vehicle(@camaro)
-
       expect(@camaro.register_date).to eq(Date.today)
     end
   end
