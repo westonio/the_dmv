@@ -24,11 +24,22 @@ class Facility
     end
   end
 
+  def add_plate(vehicle)
+    if vehicle.electric_vehicle? 
+      vehicle.register_plate(:ev)
+    elsif vehicle.antique? 
+      vehicle.register_plate(:antique)
+    else
+      vehicle.register_plate(:regular)
+    end
+  end
+
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration')
       @registered_vehicles << vehicle
-      charge_fee(vehicle) #uses the charge_fee method
       vehicle.register_date # reaches through to the register_date method
+      charge_fee(vehicle) # uses the charge_fee method above
+      add_plate(vehicle) # uses the add_plate method above
     else
       "Error: Vehicle Registration is not enabled for this facility"
     end
