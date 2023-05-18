@@ -46,5 +46,13 @@ RSpec.describe Facility do
 
       expect(@facility.collected_fees).to eq(100)
     end
+
+    it 'can update the registration date' do
+      @facility.add_service('Vehicle Registration')
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+      @facility.register_vehicle(camaro)
+
+      expect(camaro.registration_date).to eq(Date.today)
+    end
   end
 end
