@@ -33,5 +33,10 @@ RSpec.describe Facility do
       @facility.register_vehicle(camaro)
       expect(@facility.registered_vehicles).to eq([camaro])
     end
+    
+    it 'gives error if facility does not offer service' do
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+      expect(@facility.register_vehicle(camaro)).to eq("Error: Vehicle Registration is not enabled for this facility")
+    end
   end
 end
