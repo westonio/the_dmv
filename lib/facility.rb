@@ -18,6 +18,7 @@ class Facility
     if @services.include?('Vehicle Registration')
       @registered_vehicles << vehicle
       @collected_fees += 100
+      vehicle.register_date
     else
       "Error: Vehicle Registration is not enabled for this facility"
     end
