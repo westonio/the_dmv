@@ -44,4 +44,16 @@ RSpec.describe Vehicle do
       expect(@camaro.register_date).to eq(Date.today)
     end
   end
+
+  describe '#register_plate' do
+    it 'can update the plate type' do
+      @camaro.register_plate(:antique)
+      @bolt.register_plate(:ev)
+      @cruz.register_plate(:regular)
+
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@cruz.plate_type).to eq(:regular)
+    end
+  end
 end
