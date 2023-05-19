@@ -48,12 +48,22 @@ RSpec.describe FacilityFactory do
 
     it 'has an NY data parser' do
       factory = FacilityFactory.new
-      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-      parsed_data = factory.ny_data_parser(new_york_facilities)
+      new_york_locations = DmvDataService.new.ny_dmv_office_locations
+      parsed_data = factory.ny_data_parser(new_york_locations)
 
       expect(parsed_data[0]).to be_a(Hash)
       expect(parsed_data).to be_an(Array)
       expect(parsed_data[0].keys).to eq([:name,:address,:phone])
+    end
+
+    it 'can create ny facilities' do
+      factory = FacilityFactory.new
+      new_york_locations = DmvDataService.new.ny_dmv_office_locations
+
+      new_york_facilities = factory.create_ny_facilities(new_york_locations)
+      expect(new_york_facilities).to be_an(Array)
+      expect(new_york_facilities).to_not be([]) # not empty
+      expect(new_york_facilities[0]).to be_a(Facility)
     end
   end
 end
