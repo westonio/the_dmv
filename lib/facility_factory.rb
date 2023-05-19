@@ -33,6 +33,25 @@ class FacilityFactory
       string.split(' ').map(&:capitalize).join(" ")
     end
   
+    def ny_data_parser(facility_dataset)
+      facility_dataset.map do |facility_details|
+        address_parsed = ny_address_parser(facility_details)
+        {
+          name: facility_details[:office_name].capitalize,
+          address: address_parsed,
+          phone: facility_details[:public_phone_number]
+        }
+      end
+    end  
+  
+    def create_ny_facilities(facility_dataset)
+      ny_data = ny_data_parser(facility_dataset)
+      # iterate through each parsed data to create new facility
+      ny_data.map do |facility|
+        Facility.new(facility)
+      end
+    end
+
   # def create_facilities(facility_dataset)
   #   if defined? facility_dataset.to_s.include?("or_")
   #     create_or_facilities(facility_dataset)
