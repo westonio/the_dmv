@@ -31,11 +31,26 @@ RSpec.describe FacilityFactory do
   end
 
   describe 'NY methods' do
+    it 'Can Titleize Strings' do
+      factory = FacilityFactory.new
+      string = "1234 west COLORADO blvd., denver, cOlOrAdO"
+      expect(factory.titleize(string)).to eq('1234 West Colorado Blvd., Denver, Colorado')
+    end
+    
+    it 'can parse the ny address data into one string' do
+      factory = FacilityFactory.new
+      facility_details = {:street_address_line_1=>"168 91ST AVE.", :city=>"JAMAICA", :state=>"NY", :zip_code=>"11432"}
+      
+      parsed_data = factory.ny_address_parser(facility_details)
+      expect(parsed_data).to be_a(String)
+      expect(parsed_data).to eq("168 91st Ave. Jamaica NY 11432")
+    end
+
     it 'has an NY data parser' do
       factory = FacilityFactory.new
       new_york_facilities = DmvDataService.new.ny_dmv_office_locations
       parsed_data = factory.ny_data_parser(new_york_facilities)
-      
+
       expect(parsed_data[0]).to be_a(Hash)
       expect(parsed_data).to be_an(Array)
       expect(parsed_data[0].keys).to eq([:name,:address,:phone])
