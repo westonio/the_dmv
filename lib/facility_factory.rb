@@ -47,4 +47,11 @@ class FacilityFactory
       {name: titleize(name), address: address, phone: phone}
     end
   end
+
+  def create_facilities(facility_dataset)
+    facilities_parsed = parse_data(facility_dataset)
+    facilities_parsed.map do |facility|
+      Facility.new(facility)
+    end
+  end
 end
