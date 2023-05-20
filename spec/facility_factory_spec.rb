@@ -42,13 +42,13 @@ RSpec.describe FacilityFactory do
       ny_locations = DmvDataService.new.ny_dmv_office_locations
       mo_locations = DmvDataService.new.mo_dmv_office_locations
       
-      oregon = factory.address_parser(or_locations)
-      new_york = factory.address_parser(ny_locations)
-      missouri = factory.address_parser(mo_locations)
+      oregon = factory.address_parser(or_locations[0])
+      new_york = factory.address_parser(ny_locations[0])
+      missouri = factory.address_parser(mo_locations[0])
 
-      expect(oregon[0]).to be_a(String)
-      expect(new_york[0]).to be_a(String)
-      expect(missouri[0]).to be_a(String)
+      expect(oregon).to be_a(String)
+      expect(new_york).to be_a(String)
+      expect(missouri).to be_a(String)
     end
   end
 
@@ -59,8 +59,8 @@ RSpec.describe FacilityFactory do
       
       parsed = factory.parse_data(or_locations)
       
-      expect(parsed).to be_a(Hash)
-      expect(parsed.keys).to eq([:name, :address, :phone])
+      expect(parsed).to be_a(Array)
+      expect(parsed[0].keys).to eq([:name, :address, :phone])
     end
     
     it 'can parse all NY data into name, address, phone format' do
@@ -69,8 +69,8 @@ RSpec.describe FacilityFactory do
      
       parsed = factory.parse_data(ny_locations)
       
-      expect(parsed).to be_a(Hash)
-      expect(parsed.keys).to eq([:name, :address, :phone])
+      expect(parsed).to be_a(Array)
+      expect(parsed[0].keys).to eq([:name, :address, :phone])
     end
 
     it 'can parse all MO data into name, address, phone format' do
@@ -79,8 +79,8 @@ RSpec.describe FacilityFactory do
        
       parsed = factory.parse_data(mo_locations)
       
-      expect(parsed).to be_a(Hash)
-      expect(parsed.keys).to eq([:name, :address, :phone])
+      expect(parsed).to be_a(Array)
+      expect(parsed[0].keys).to eq([:name, :address, :phone])
     end
   end
 
