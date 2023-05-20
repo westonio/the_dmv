@@ -66,4 +66,35 @@ RSpec.describe FacilityFactory do
       expect(new_york_facilities[0]).to be_a(Facility)
     end
   end
+
+  describe 'MO methods' do
+    it 'can parse MO address data into one string' do
+      factory = FacilityFactory.new
+      facility_details = {:address1=>"10425 WEST FLORISSANT", :city=>"FERGUSON", :state=>"MO", :zipcode=>"63136"}
+      
+      parsed_data = factory.mo_address_parser(facility_details)
+      expect(parsed_data).to be_a(String)
+      expect(parsed_data).to eq("10425 West Florissant Ferguson MO 63136")
+    end
+    
+    it 'has an MO data parser' do
+      factory = FacilityFactory.new
+      mo_locations = DmvDataService.new.mo_dmv_office_locations
+      parsed_data = factory.mo_data_parser(mo_locations)
+
+      expect(parsed_data[0]).to be_a(Hash)
+      expect(parsed_data).to be_an(Array)
+      expect(parsed_data[0].keys).to eq([:name,:address,:phone])
+    end
+
+    it 'can create mo facilities' do
+      factory = FacilityFactory.new
+      mo_locations = DmvDataService.new.mo_dmv_office_locations
+
+      mo_facilities = factory.create_mo_facilities(mo_locations)
+      expect(mo_facilities).to be_an(Array)
+      expect(mo_facilities).to_not be([]) # not empty
+      expect(mo_facilities[0]).to be_a(Facility)
+    end
+  end
 end
