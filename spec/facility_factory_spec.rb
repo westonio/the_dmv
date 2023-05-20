@@ -93,7 +93,7 @@ RSpec.describe FacilityFactory do
   end
 
   describe '#create_facilities' do
-    it 'can create OR facilities from parsed data' do
+    it 'can create OR facilities' do
       factory = FacilityFactory.new
       or_locations = DmvDataService.new.or_dmv_office_locations
       
@@ -103,7 +103,7 @@ RSpec.describe FacilityFactory do
       expect(or_facilities).to be_an(Array)
     end
 
-    it 'can create NY facilities from parsed data' do
+    it 'can create NY facilities' do
       factory = FacilityFactory.new
       ny_locations = DmvDataService.new.ny_dmv_office_locations
       
@@ -112,7 +112,8 @@ RSpec.describe FacilityFactory do
       expect(ny_facilities[0]).to be_a(Facility)
       expect(ny_facilities).to be_an(Array)
     end
-    it 'can create MO facilities from parsed data' do
+
+    it 'can create MO facilities' do
       factory = FacilityFactory.new
       mo_locations = DmvDataService.new.mo_dmv_office_locations
       
