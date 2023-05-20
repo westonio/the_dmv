@@ -84,9 +84,42 @@ RSpec.describe FacilityFactory do
     end
   end
 
-  it 'Can Titleize Strings' do
-    factory = FacilityFactory.new
-    string = "1234 west COLORADO blvd., denver, cOlOrAdO"
-    expect(factory.titleize(string)).to eq('1234 West Colorado Blvd., Denver, Colorado')
+  describe '#titleize' do
+    it 'can return string with first letter of each word capitalized' do
+      factory = FacilityFactory.new
+      string = "1234 west COLORADO blvd., denver, cOlOrAdO"
+      expect(factory.titleize(string)).to eq('1234 West Colorado Blvd., Denver, Colorado')
+    end
+  end
+
+  describe '#create_facilities' do
+    it 'can create OR facilities from parsed data' do
+      factory = FacilityFactory.new
+      or_locations = DmvDataService.new.or_dmv_office_locations
+      
+      or_facilities = factory.create_facilities(or_locations)
+      
+      expect(or_facilities[0]).to be_a(Facility)
+      expect(or_facilities).to be_an(Array)
+    end
+
+    it 'can create NY facilities from parsed data' do
+      factory = FacilityFactory.new
+      ny_locations = DmvDataService.new.ny_dmv_office_locations
+      
+      ny_facilities = factory.create_facilities(ny_locations)
+      
+      expect(ny_facilities[0]).to be_a(Facility)
+      expect(ny_facilities).to be_an(Array)
+    end
+    it 'can create MO facilities from parsed data' do
+      factory = FacilityFactory.new
+      mo_locations = DmvDataService.new.mo_dmv_office_locations
+      
+      mo_facilities = factory.create_facilities(mo_locations)
+      
+      expect(mo_facilities[0]).to be_a(Facility)
+      expect(mo_facilities).to be_an(Array)
+    end
   end
 end
