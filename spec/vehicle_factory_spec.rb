@@ -14,5 +14,6 @@ RSpec.describe VehicleFactory do
     added_vehicles = factory.create_vehicles(wa_ev_registrations)
     expect(added_vehicles).to be_an(Array)
     expect(added_vehicles).to_not be([]) # not empty
+    expect(added_vehicles.first).to be_an(Vehicle)
   end
 end
