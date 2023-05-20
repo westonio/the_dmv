@@ -1,5 +1,6 @@
 class FacilityFactory
 
+# Oregon methods:
   def or_data_parser(facility_dataset)
     facility_dataset.map do |facility_details|
       address_parsed = JSON.parse(facility_details[:location_1][:human_address])
@@ -19,6 +20,7 @@ class FacilityFactory
     end
   end
 
+# New York Methods:
   # This is a helper method for ny_address_parser
     def ny_address_parser(facility_details)
         address_parsed = ""
@@ -37,7 +39,7 @@ class FacilityFactory
       facility_dataset.map do |facility_details|
         address_parsed = ny_address_parser(facility_details)
         {
-          name: facility_details[:office_name].capitalize,
+          name: titleize(facility_details[:office_name]),
           address: address_parsed,
           phone: facility_details[:public_phone_number]
         }
@@ -48,6 +50,34 @@ class FacilityFactory
       ny_data = ny_data_parser(facility_dataset)
       # iterate through each parsed data to create new facility
       ny_data.map do |facility|
+        Facility.new(facility)
+      end
+    end
+
+# Missouri Methods:
+    def mo_address_parser(facility_details)
+      address_parsed = ""
+      address_parsed += "#{titleize(facility_details[:address1])}"
+      address_parsed += " #{titleize(facility_details[:city])}"
+      address_parsed += " #{facility_details[:state]}"
+      address_parsed += " #{facility_details[:zipcode]}"
+    end
+
+    def mo_data_parser(facility_dataset)
+      facility_dataset.map do |facility_details|
+        address_parsed = mo_address_parser(facility_details)
+        {
+          name: titleize(facility_details[:name]),
+          address: address_parsed,
+          phone: facility_details[:phone]
+        }
+      end
+    end  
+
+    def create_mo_facilities(facility_dataset)
+      mo_data = mo_data_parser(facility_dataset)
+      # iterate through each parsed data to create new facility
+      mo_data.map do |facility|
         Facility.new(facility)
       end
     end
