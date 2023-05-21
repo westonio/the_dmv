@@ -54,4 +54,11 @@ class FacilityFactory
       Facility.new(facility)
     end
   end
+
+# This method is used after creating facilities
+  def add_to_dmv(created_facilities, dmv_name)
+    created_facilities.map do |facility|
+      dmv_name.add_facility(facility)
+    end
+  end
 end
