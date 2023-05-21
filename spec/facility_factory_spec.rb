@@ -103,4 +103,42 @@ RSpec.describe FacilityFactory do
       expect(mo_facilities).to be_an(Array)
     end
   end
+
+  describe '#add_to_dmv' do
+    it 'can add facilities to the OR dmv' do
+      or_facilities = @factory.create_facilities(@or_locations)
+      or_dmv = Dmv.new
+      
+      @factory.add_to_dmv(or_facilities, or_dmv)
+      
+      expect(or_dmv.facilities.length).to eq(or_facilities.length)
+      expect(or_dmv.facilities).not_to be([])
+      expect(or_dmv.facilities.first).to be_a(Facility)
+      expect(or_dmv.facilities.first.name).to eq("Albany Dmv Office")
+    end
+
+    it 'can add facilities to the NY dmv' do
+      ny_facilities = @factory.create_facilities(@ny_locations)
+      ny_dmv = Dmv.new
+      
+      @factory.add_to_dmv(ny_facilities, ny_dmv)
+      
+      expect(ny_dmv.facilities.length).to eq(ny_facilities.length)
+      expect(ny_dmv.facilities).not_to be([])
+      expect(ny_dmv.facilities.first).to be_a(Facility)
+      expect(ny_dmv.facilities.first.name).to eq("Jamaica Kiosk")
+    end
+
+    it 'can add facilities to the MO dmv' do
+      mo_facilities = @factory.create_facilities(@mo_locations)
+      mo_dmv = Dmv.new
+      
+      @factory.add_to_dmv(mo_facilities, mo_dmv)
+      
+      expect(mo_dmv.facilities.length).to eq(mo_facilities.length)
+      expect(mo_dmv.facilities).not_to be([])
+      expect(mo_dmv.facilities.first).to be_a(Facility)
+      expect(mo_dmv.facilities.first.name).to eq("Ferguson-office Closed Until Further Notice")
+    end
+  end
 end
