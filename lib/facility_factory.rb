@@ -1,26 +1,25 @@
 class FacilityFactory
   # This is a helper method for address_parser 
   def or_address_parser(facility)
-    address_parsed = JSON.parse(facility[:location_1][:human_address])
-    address_parsed.values.join(" ")
+    JSON.parse(facility[:location_1][:human_address]).values.join(" ")
   end
   
   # This is a helper method for address_parser
-  def ny_address_parser(facility_details)
-    address_parsed = ""
-    address_parsed += "#{titleize(facility_details[:street_address_line_1])}"
-    address_parsed += " #{titleize(facility_details[:city])}"
-    address_parsed += " #{facility_details[:state]}"
-    address_parsed += " #{facility_details[:zip_code]}"
+  def ny_address_parser(facility)
+    address = ""
+    address += "#{titleize(facility[:street_address_line_1])}"
+    address += " #{titleize(facility[:city])}"
+    address += " #{facility[:state]}"
+    address += " #{facility[:zip_code]}"
   end
   
   # This is a helper method for address_parser
-  def mo_address_parser(facility_details)
-    address_parsed = ""
-    address_parsed += "#{titleize(facility_details[:address1])}"
-    address_parsed += " #{titleize(facility_details[:city])}"
-    address_parsed += " #{facility_details[:state]}"
-    address_parsed += " #{facility_details[:zipcode]}"
+  def mo_address_parser(facility)
+    address = ""
+    address += "#{titleize(facility[:address1])}"
+    address += " #{titleize(facility[:city])}"
+    address += " #{facility[:state]}"
+    address += " #{facility[:zipcode]}"
   end
   
   # This is a helper function to capitalize the first character of each word
@@ -49,8 +48,8 @@ class FacilityFactory
   end
 
   def create_facilities(facility_dataset)
-    facilities_parsed = parse_data(facility_dataset)
-    facilities_parsed.map do |facility|
+    facilities = parse_data(facility_dataset)
+    facilities.map do |facility|
       Facility.new(facility)
     end
   end
