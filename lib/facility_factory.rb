@@ -6,11 +6,11 @@ class FacilityFactory
   
   # This is a helper method for address_parser
   def ny_address_parser(facility)
-    address = ""
-    address += "#{titleize(facility[:street_address_line_1])}"
-    address += " #{titleize(facility[:city])}"
-    address += " #{facility[:state]}"
-    address += " #{facility[:zip_code]}"
+    [titleize(facility[:street_address_line_1]),
+    facility[:street_address_line_2],
+    titleize(facility[:city]),
+    facility[:state], facility[:zip_code]
+    ].compact.join(" ")
   end
   
   # This is a helper method for address_parser
