@@ -87,6 +87,8 @@ RSpec.describe FacilityFactory do
       
       expect(or_facilities[0]).to be_a(Facility)
       expect(or_facilities).to be_an(Array)
+    # the following assertion is subject to fail if any hard data changes (pulled from api source)
+      expect(or_facilities.first.name).to eq("Albany Dmv Office")
     end
 
     it 'can create NY facilities' do
@@ -94,6 +96,8 @@ RSpec.describe FacilityFactory do
       
       expect(ny_facilities[0]).to be_a(Facility)
       expect(ny_facilities).to be_an(Array)
+    # the following assertion is subject to fail if any hard data changes (pulled from api source)
+      expect(ny_facilities.first.name).to eq("Jamaica Kiosk")
     end
 
     it 'can create MO facilities' do
@@ -101,6 +105,8 @@ RSpec.describe FacilityFactory do
       
       expect(mo_facilities[0]).to be_a(Facility)
       expect(mo_facilities).to be_an(Array)
+    # the following assertion is subject to fail if any hard data changes (pulled from api source)
+      expect(mo_facilities.first.name).to eq("Ferguson-office Closed Until Further Notice")
     end
   end
 
@@ -114,6 +120,7 @@ RSpec.describe FacilityFactory do
       expect(or_dmv.facilities.length).to eq(or_facilities.length)
       expect(or_dmv.facilities).not_to be([])
       expect(or_dmv.facilities.first).to be_a(Facility)
+    # the following assertion is subject to fail if any hard data changes (pulled from api source)
       expect(or_dmv.facilities.first.name).to eq("Albany Dmv Office")
     end
 
@@ -126,6 +133,7 @@ RSpec.describe FacilityFactory do
       expect(ny_dmv.facilities.length).to eq(ny_facilities.length)
       expect(ny_dmv.facilities).not_to be([])
       expect(ny_dmv.facilities.first).to be_a(Facility)
+    # the following assertion is subject to fail if any hard data changes (pulled from api source)
       expect(ny_dmv.facilities.first.name).to eq("Jamaica Kiosk")
     end
 
@@ -138,6 +146,7 @@ RSpec.describe FacilityFactory do
       expect(mo_dmv.facilities.length).to eq(mo_facilities.length)
       expect(mo_dmv.facilities).not_to be([])
       expect(mo_dmv.facilities.first).to be_a(Facility)
+    # the following assertion is subject to fail if any hard data changes (pulled from api source)
       expect(mo_dmv.facilities.first.name).to eq("Ferguson-office Closed Until Further Notice")
     end
   end
