@@ -8,8 +8,10 @@ RSpec.describe FacilityFactory do
     @mo_locations = DmvDataService.new.mo_dmv_office_locations
   end
 
-  it 'exists' do
-    expect(@factory).to be_an_instance_of(FacilityFactory)
+  describe 'initialize' do
+    it 'exists' do
+      expect(@factory).to be_an_instance_of(FacilityFactory)
+    end
   end
 
   describe 'address parsers' do
