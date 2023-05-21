@@ -15,11 +15,12 @@ class FacilityFactory
   
   # This is a helper method for address_parser
   def mo_address_parser(facility)
-    address = ""
-    address += "#{titleize(facility[:address1])}"
-    address += " #{titleize(facility[:city])}"
-    address += " #{facility[:state]}"
-    address += " #{facility[:zipcode]}"
+    [titleize(facility[:address1]),
+    facility[:address2],
+    titleize(facility[:city]),
+    facility[:state],
+    facility[:zipcode]
+  ].compact.join(" ")
   end
   
   # This is a helper function to capitalize the first character of each word
