@@ -108,7 +108,7 @@ RSpec.describe FacilityFactory do
       expect(mo_facilities[0]).to be_a(Facility)
       expect(mo_facilities).to be_an(Array)
     # the following assertion is subject to fail if any hard data changes (pulled from api source)
-      expect(mo_facilities.first.name).to eq("Ferguson-office Closed Until Further Notice")
+      expect(mo_facilities.first.name).to eq("Oakville")
     end
   end
 
@@ -149,7 +149,7 @@ RSpec.describe FacilityFactory do
       expect(mo_dmv.facilities).not_to be([])
       expect(mo_dmv.facilities.first).to be_a(Facility)
     # the following assertion is subject to fail if any hard data changes (pulled from api source)
-      expect(mo_dmv.facilities.first.name).to eq("Ferguson-office Closed Until Further Notice")
+      expect(mo_dmv.facilities.first.name).to eq("Oakville")
     end
   end
 end
