@@ -1,13 +1,19 @@
 class FacilityFactory
   # This is a helper method for address_parser 
   def or_address_parser(facility)
-    JSON.parse(facility[:location_1][:human_address]).values.join(" ")
+    address_1 = JSON.parse(facility[:location_1][:human_address]).values # returns an array with address line 1, city, state, zip
+    #some addresses have line 2
+    if facility.has_key?(:location_2)
+      address_2 = JSON.parse(facility[:location_2][:human_address]).values[0] # returns the address line 2 value when present
+      address_1.insert(1,address_2) # adds the line 2 to the address array
+    end
+    address_1.join(' ')
   end
   
   # This is a helper method for address_parser
   def ny_address_parser(facility)
     [titleize(facility[:street_address_line_1]),
-    facility[:street_address_line_2],
+    facility[:street_address_line_2], # if line 2 not present, .compact removes nil
     titleize(facility[:city]),
     facility[:state], facility[:zip_code]
     ].compact.join(" ")
@@ -16,7 +22,7 @@ class FacilityFactory
   # This is a helper method for address_parser
   def mo_address_parser(facility)
     [titleize(facility[:address1]),
-    facility[:address2],
+    facility[:address2], # if line 2 not present, .compact removes nil
     titleize(facility[:city]),
     facility[:state],
     facility[:zipcode]

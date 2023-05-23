@@ -15,13 +15,21 @@ RSpec.describe FacilityFactory do
   end
 
   describe 'address parsers' do
-    it 'has OR address parser' do
+    it 'has OR address parser for one address line' do
       facility_details = {:location_1=>
       {:latitude=>"42.184549",
       :longitude=>"-122.671018",
       :human_address=>"{\"address\": \"600 Tolman Creek Rd\", \"city\": \"Ashland\", \"state\": \"OR\", \"zip\": \"97520\"}"}}
       
       expect(@factory.or_address_parser(facility_details)).to eq("600 Tolman Creek Rd Ashland OR 97520")
+    end
+
+    it 'has OR address parser for 2 address lines' do
+      facility_details = {:title=>"Baker City DMV Office",
+  :location_1=>{:latitude=>"44.789564", :longitude=>"-117.840494", :human_address=>"{\"address\": \"3370 10th St\", \"city\": \"Baker City\", \"state\": \"OR\", \"zip\": \"97814\"}"},
+  :location_2=>{:human_address=>"{\"address\": \"Suite A\", \"city\": \"\", \"state\": \"\", \"zip\": \"\"}"}}
+      
+      expect(@factory.or_address_parser(facility_details)).to eq("3370 10th St Suite A Baker City OR 97814")
     end
 
     it 'has NY address parser' do
