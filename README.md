@@ -1,9 +1,9 @@
 # The DMV
 
 ## Project Overview
-*The DMV* is a Ruby project I worked on solo that simulates the operations of a Department of Motor Vehicles (DMV). The project involves creating a set of classes that interact to perform various tasks related to vehicle registration, driver's license acquisition, and DMV Facilities. This project also consumes data from various state DMV APIs to create facility and vehicle objects.
-<br/>
-This Ruby project showcases my ability to work with an existing codebase, apply object-oriented programming principles, and integrate external data to build a comprehensive simulation of DMV operations. The project highlights my proficiency in Test-Driven Development and demonstrates my coding skills in creating interactive and modular Ruby applications.
+*The DMV* is a Ruby project I worked on solo that simulates the operations of a Department of Motor Vehicles (DMV). The project involves creating a set of classes that interact to perform various tasks related to vehicle registration, driver's license acquisition, and DMV Facilities. The project also consumes data from various state DMV APIs to create facility and vehicle objects.
+<br/> <br/>
+This showcases my ability to work with an existing codebase, apply object-oriented programming principles, and integrate external data to build a comprehensive simulation of DMV operations. The project highlights my proficiency in Test-Driven Development and demonstrates my coding skills in creating interactive and modular Ruby applications.
 <br/>
 
 ### Languages, Frameworks, and Tools used:
