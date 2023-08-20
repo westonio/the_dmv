@@ -51,9 +51,9 @@ facility.administer_written_test(registrant)
 - Adapting the code to work with multiple data sources (different states' DMV data) required significant refactoring. Ensuring that the existing code continued to work seamlessly while integrating new data sources without introducing errors or breaking existing functionality was a challenge. This task demanded a balance between maintaining backward compatibility and introducing new features.
 
 ### Accomplishments
-- Successfully improved an existing codebase by addressing pre-existing bugs and errors. Through careful debugging and refactoring, you not only resolved issues but also gained practical experience in navigating and understanding unfamiliar codebases.
+- Successfully improved an existing codebase by addressing pre-existing bugs and errors. Through careful debugging and refactoring, I resolved issues and gained practical experience in navigating and understanding unfamiliar codebases.
 - Demonstrated strong object-oriented programming skills by creating well-structured classes that represent different entities and interactions within a DMV facility. This approach allowed for easy extensibility and maintenance of the code.
-- Employed Test-Driven Development (TDD) to design and implement new features. By writing tests first and then building code to pass those tests, you ensured that the code met the expected behavior and improved its reliability, maintainability, and robustness.
+- Employed Test-Driven Development (TDD) to design and implement new features. By writing tests first and then building code to pass those tests, I ensured that the code met the expected behavior and improved its reliability, maintainability, and robustness.
 - Successfully integrated external data sets from various DMV facilities and vehicle registrations into the project. This achievement showcases my ability to work with real-world data and demonstrates the project's potential for handling diverse data sources.
 
 ---
